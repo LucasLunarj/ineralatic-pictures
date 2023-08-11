@@ -1,6 +1,7 @@
 import { useState } from 'react'
 //Components
 import { ImageBox } from './ImageBox'
+import { Modal } from './Modal'
 
 //Images
 import picture1 from '../../public/1.jpg'
@@ -30,16 +31,37 @@ export const Page = () => {
 
 
 
+    const [showModal, setShowModal] = useState(false);
+    const [individualImg, setIndividualImg] = ([]);
+
+
+
+    function handleSwitch(img) {
+        if (!showModal === true) {
+            setShowModal(true);
+            () => setIndividualImg(img.filter((img) => img == img))
+            console.log(individualImg)
+        }
+        else {
+            setShowModal(false)
+
+        }
+    }
+
 
     return (
         <div className="text-white">
-            <h1 className="text-center text-4xl pt-3">Intergalactic Pictures</h1>
-            <div>
+            {showModal === false ? <div>test</div> : null}
+            <h1 className="text-center text-4xl p-4">Intergalactic Pictures</h1>
+            <div className=' pt-10 h-screen lg:grid lg:grid-cols-3 gap-5 flex flex-col lg:mx-40 '>
                 {images.map(item => {
-                    return <ImageBox key={item.id} images={item.picture} />
+                    return <div key={item.id} onClick={() => handleSwitch(item.img)} >
+                        <ImageBox key={item.id} images={item.picture} />
+                    </div>
 
                 })}
             </div>
+
         </div>
     )
 }
