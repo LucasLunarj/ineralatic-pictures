@@ -32,30 +32,33 @@ export const Page = () => {
 
 
     const [showModal, setShowModal] = useState(false);
-    const [individualImg, setIndividualImg] = ([]);
+    const [individualImg, setIndividualImg] = useState([]);
 
 
+    function handleImg(img, id) {
+        setIndividualImg(images.filter((item) => item.id == id))
+        setShowModal(true)
+    }
 
-    function handleSwitch(img) {
-        if (!showModal === true) {
-            setShowModal(true);
-            () => setIndividualImg(img.filter((img) => img == img))
-            console.log(individualImg)
-        }
-        else {
+    console.log(individualImg[0])
+
+    function openAndCloseModal() {
+        if (showModal === false) {
+            setShowModal(true)
+        } else {
             setShowModal(false)
-
         }
     }
 
+    console.log(showModal)
 
     return (
         <div className="text-white">
-            {showModal === false ? <div>test</div> : null}
+            {showModal === true ? individualImg.map((item, index) => { return <Modal click={openAndCloseModal} key={index} img={item.picture} /> }) : null}
             <h1 className="text-center text-4xl p-4">Intergalactic Pictures</h1>
             <div className=' pt-10 h-screen lg:grid lg:grid-cols-3 gap-5 flex flex-col lg:mx-40 '>
                 {images.map(item => {
-                    return <div key={item.id} onClick={() => handleSwitch(item.img)} >
+                    return <div key={item.id} onClick={() => handleImg(item.img, item.id)} >
                         <ImageBox key={item.id} images={item.picture} />
                     </div>
 
