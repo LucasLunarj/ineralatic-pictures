@@ -40,7 +40,7 @@ export const Page = () => {
         setShowModal(true)
     }
 
-    console.log(individualImg[0])
+
 
     function openAndCloseModal() {
         if (showModal === false) {
@@ -56,7 +56,7 @@ export const Page = () => {
         <div className="text-white">
             {showModal === true ? individualImg.map((item, index) => { return <Modal click={openAndCloseModal} key={index} img={item.picture} /> }) : null}
             <h1 className="text-center text-4xl p-4">Intergalactic Pictures</h1>
-            <div className=' pt-10 h-screen lg:grid lg:grid-cols-3 gap-5 flex flex-col lg:mx-40 '>
+            <div className=' container pt-10 h-screen lg:grid lg:grid-cols-3 md:grid-cols-2 gap-5 flex flex-col lg:mx-40 '>
                 {images.map(item => {
                     return <div key={item.id} onClick={() => handleImg(item.img, item.id)} >
                         <ImageBox key={item.id} images={item.picture} />
